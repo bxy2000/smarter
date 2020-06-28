@@ -1,0 +1,79 @@
+<page-header [title]="''" [autoBreadcrumb]="false">
+  功能导航&nbsp;/&nbsp;系统功能&nbsp;/&nbsp;用户管理
+</page-header>
+<nz-card>
+  <ng-container *ngIf="formStatus===0">
+    <button nz-button (click)="addRow()" class="editable-add-btn">新增</button>
+  </ng-container>
+  <ng-container *ngIf="formStatus !== 0">
+    <button nz-button (click)="addRow()" class="editable-add-btn" disabled="disabled">新增</button>
+  </ng-container>
+  <nz-table
+    #editRowTable
+    nzSize="small"
+    nzBordered
+    [nzFrontPagination]="false"
+    [nzTotal]="total"
+    [(nzPageIndex)]="pageIndex"
+    [(nzPageSize)]="pageSize"
+    (nzPageIndexChange)="loadUserExtends()"
+    [nzData]="dataSet"
+    [nzShowTotal]="totalTemplate"
+  >
+    <ng-template #totalTemplate let-total>
+      共 {{total}} 条
+    </ng-template>
+    <thead>
+    <tr>
+      <th nzWidth="100px" nzAlign="center">登录名</th>
+      <th nzWidth="100px" nzAlign="center">姓名</th>
+      <th nzWidth="80px" nzAlign="center">性别</th>
+      <th nzWidth="180px" nzAlign="center">邮箱</th>
+      <th nzWidth="100px" nzAlign="center">角色</th>
+      <th nzWidth="150px" nzAlign="center">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of editRowTable.data">
+      <ng-container *ngIf="!editCache[data.id].edit; else editTemplate">
+        <td>{{data.user?.login}}</td>
+        <td>{{data.username}}</td>
+        <td>
+          <div ngSwitch="{{data.gender}}">
+            <span *ngSwitchCase="'MALE'">男</span>
+            <span *ngSwitchCase="'FEMALE'">女</span>
+          </div>
+        </td>
+        <td>{{data.user?.email}}</td>
+        <td>{{dispRole(data.roles)}}</td>
+        <td>
+          <a (click)="startEdit(data.id)">编辑</a>&nbsp;
+          <a nz-popconfirm nzPopconfirmTitle="确认删除吗？" (nzOnConfirm)="deleteRow(data.id)">删除</a>&nbsp;
+          <a nz-popconfirm nzPopconfirmTitle="重置密码吗？" (nzOnConfirm)="resetPassword(data.user.login)">重置密码</a>
+        </td>
+      </ng-container>
+      <ng-template #editTemplate>
+        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.user.login"></td>
+        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.username"></td>
+        <td>
+          <nz-select [(ngModel)]="editCache[data.id].data.gender" nzPlaceHolder=" 性别">
+            <nz-option nzValue="MALE" nzLabel="男"></nz-option>
+            <nz-option nzValue="FEMALE" nzLabel="女"></nz-option>
+          </nz-select>
+        </td>
+        <td><input type="email" nz-input [(ngModel)]="editCache[data.id].data.user.email"></td>
+        <td>
+          <nz-select style="width: 180px" [(ngModel)]="roleIds" [nzMode]="'multiple'"
+                     nzAllowClear nzPlaceHolder="角色">
+            <nz-option *ngFor="let role of roles" [nzValue]="role.id" [nzLabel]="role.roleName"></nz-option>
+          </nz-select>
+        </td>
+        <td>
+          <a (click)="saveEdit(data.id)">保存</a>&nbsp;a
+          <a nz-popconfirm nzTitle="确认取消吗?" (nzOnConfirm)="cancelEdit(data.id)">取消</a>
+        </td>
+      </ng-template>
+    </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

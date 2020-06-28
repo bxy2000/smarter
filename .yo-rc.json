@@ -1,0 +1,41 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.boxy.smarter",
+      "nativeLanguage": "zh-cn"
+    },
+    "jhipsterVersion": "6.8.0",
+    "applicationType": "monolith",
+    "baseName": "smarter",
+    "packageName": "com.boxy.smarter",
+    "packageFolder": "com/boxy/smarter",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "OTMwM2YwNzYwNGJiN2UxMTE4ZDNkOWIwMDg1MWM3MjdmNWQ1ZTJmZjRkNmRhY2M3MzY0ZTUyNGFhMmYzNmUxZmZiMDdjOGMyOTIxNzhlNGU2MjNiOWZlMmYwMWYwNWFiOWI4N2RkNDdkMDZjMGFjNzNiZjkxZDdmZjQxNjU2Mzk=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1593249103718,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "clientPackageManager": "yarn",
+    "nativeLanguage": "zh-cn",
+    "languages": ["zh-cn"],
+    "blueprints": [],
+    "skipClient": true,
+    "skipFakeData": true
+  }
+}

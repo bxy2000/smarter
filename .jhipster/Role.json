@@ -1,0 +1,45 @@
+{
+    "name": "Role",
+    "fields": [
+        {
+            "fieldName": "roleName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength",
+                "unique"
+            ],
+            "fieldValidateRulesMaxlength": "80"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "menu",
+            "otherEntityRelationshipName": "role",
+            "relationshipName": "menu",
+            "otherEntityField": "text",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "userExtends",
+            "otherEntityRelationshipName": "role",
+            "relationshipName": "userExtends",
+            "otherEntityField": "name",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200627101600",
+    "javadoc": "角色",
+    "entityTableName": "role",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

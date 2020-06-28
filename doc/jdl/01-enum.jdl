@@ -1,0 +1,9 @@
+/**
+    性别
+ */
+enum Gender {
+    // 男
+    MALE,
+    // 女
+    FEMALE
+}

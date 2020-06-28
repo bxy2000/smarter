@@ -1,0 +1,76 @@
+/**
+    组织机构
+ */
+entity Organization {
+    // 机构代码
+    code String required maxlength(80),
+    // 机构名称
+    name String required
+}
+
+/**
+    用户扩展表
+ */
+entity UserExtends {
+    // 姓名
+    username String required maxlength(30),
+    // 性别
+    gender Gender,
+    // 联系方式
+    mobile String maxlength(20)
+}
+
+/**
+    角色
+ */
+entity Role {
+    roleName String required maxlength(80) required unique
+}
+
+/**
+    功能（菜单）
+ */
+entity Menu {
+    // 名称/文本
+    text String,
+    // 是否菜单组
+    group Boolean,
+    // angular 路由
+    link String maxlength(2048),
+    // 外部链接
+    externalLink String maxlength(2048),
+    // 链接 target
+    target String,
+    // 图标
+    icon String,
+    // 是否隐藏
+    hide Boolean,
+    // 描述
+    description String
+}
+
+relationship OneToOne {
+    // 用户扩展信息----用户信息
+    UserExtends{user required} to User
+}
+
+relationship OneToMany {
+    // 菜单分级----父子关系
+    Menu{children(text)} to Menu{parent(text)},
+    // 组织机构----父子关系
+    Organization{children(name)} to Organization{parent(name)}
+}
+
+relationship ManyToOne {
+    // 用户所属部门
+    UserExtends{organization} to Organization,
+    // 用户数据权限
+    UserExtends{dataPermission} to Organization
+}
+
+relationship ManyToMany {
+    // 用户扩展----角色
+    UserExtends{role(roleName)} to Role{userExtends(name)},
+    // 角色----功能（菜单）
+    Role{menu(text)} to Menu {role(roleName)}
+}

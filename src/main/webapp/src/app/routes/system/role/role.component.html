@@ -1,0 +1,83 @@
+<page-header [title]="''" [autoTitle]="false" [autoBreadcrumb]="false">
+  功能导航&nbsp;/&nbsp;系统功能&nbsp;/&nbsp;角色权限
+</page-header>
+<div nz-row nzGutter="8">
+  <div nz-col nzSpan="12">
+    <nz-card>
+      <ng-container *ngIf="formStatus===0">
+        <button nz-button (click)="addRow()" class="editable-add-btn">新增</button>
+      </ng-container>
+      <ng-container *ngIf="formStatus !== 0">
+        <button nz-button (click)="addRow()" class="editable-add-btn" disabled="disabled">新增</button>
+      </ng-container>
+      <nz-table
+        #editRowTable
+        nzSize="small"
+        nzBordered
+        [nzData]="dataSet"
+        [nzPageIndex]="0"
+        [nzPageSize]="total"
+        [nzTotal]="total"
+        [nzFrontPagination]="false"
+        [nzShowTotal]="totalTemplate"
+      >
+        <ng-template #totalTemplate let-total>
+          共 {{total}} 条
+        </ng-template>
+        <thead>
+        <tr>
+          <th nzAlign="center">角色</th>
+          <th nzWidth="120px" nzAlign="center">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of editRowTable.data" [class.active]="data.id === currentId"
+            (click)="selectCurrentRow(data)">
+          <td>
+            <div class="editable-cell">
+              <div class="editable-cell-text-wrapper">
+                <ng-container *ngIf="!editCache[data.id].edit">
+                  {{data.roleName}}
+                </ng-container>
+                <ng-container *ngIf="editCache[data.id].edit">
+                  <input type="text" nz-input [(ngModel)]="editCache[data.id].data.roleName">
+                </ng-container>
+              </div>
+            </div>
+          </td>
+          <td nzAlign="center">
+            <div class="editable-row-operations">
+              <ng-container *ngIf="formStatus===0&&!editCache[data.id].edit">
+                <a (click)="startEdit(data.id)">编辑</a>
+                <nz-popconfirm [nzTitle]="'确认删除吗?'" (nzOnConfirm)="deleteRow(data.id)">
+                  <a nz-popconfirm>删除</a>
+                </nz-popconfirm>
+              </ng-container>
+              <ng-container *ngIf="editCache[data.id].edit">
+                <a (click)="finishEdit(data.id)">保存</a>
+                <nz-popconfirm [nzTitle]="'确认取消吗?'" (nzOnConfirm)="cancelEdit(data.id)">
+                  <a nz-popconfirm>取消</a>
+                </nz-popconfirm>
+              </ng-container>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </nz-card>
+  </div>
+  <div nz-col class="gutter-row" nzSpan="12">
+    <nz-card>
+      <button nz-button (click)="saveMenu()" class="editable-add-btn">保存</button>
+      <nz-tree
+        #menuTree
+        [nzData]="nodes"
+        nzCheckable="true"
+        nzMultiple="true"
+        nzExpandAll="true"
+        [(nzCheckedKeys)]="checkedRoles"
+      >
+      </nz-tree>
+    </nz-card>
+  </div>
+</div>

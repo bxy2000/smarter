@@ -1,0 +1,3 @@
+paginate Role, UserExtends with pagination
+service all with serviceClass
+filter UserExtends
