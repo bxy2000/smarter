@@ -4,8 +4,11 @@
     .container {
       display: flex;
       flex-direction: column;
-      min-height: 100%;
-      background: #f0f2f5;
+      //min-height: 100%;
+      //background: #f0f2f5;
+      background-image: url('../../../assets/login-bg.jpg');
+      background-repeat: no-repeat;
+      background-position: -1420px 0px;
     }
     .langs {
       width: 100%;
@@ -30,9 +33,9 @@
 
     @media (min-width: @screen-md-min) {
       .container {
-        background-image: url('https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg');
+        background-image: url('../../../assets/login-bg.jpg');
         background-repeat: no-repeat;
-        background-position: center 110px;
+        background-position: center 0px;
         background-size: 100%;
       }
       .wrap {
@@ -40,17 +43,18 @@
       }
     }
     .top {
+      padding: 30px 0;
       text-align: center;
     }
     .header {
-      height: 44px;
-      line-height: 44px;
+      height: 66px;
+      line-height: 66px;
       a {
         text-decoration: none;
       }
     }
     .logo {
-      height: 44px;
+      height: 66px;
       margin-right: 16px;
     }
     .title {

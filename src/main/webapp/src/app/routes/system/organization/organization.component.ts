@@ -43,7 +43,7 @@ export class OrganizationComponent implements OnInit {
       if (data.children) {
         data.children.forEach(d => {
           const target = array.find(a => a.id === d.id);
-          target.expand = false;
+          target['expand'] = false;
           this.collapse(array, target, false);
         });
       } else {

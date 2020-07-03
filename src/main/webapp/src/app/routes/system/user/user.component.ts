@@ -102,7 +102,6 @@ export class UserComponent implements OnInit {
       (res: HttpResponse<IUserExtends[]>) => {
         this.total = parseInt(res.headers.get('X-Total-Count'));
         this.dataSet = res.body;
-        console.log(this.dataSet);
         this.updateEditCache();
       },
       (res: HttpErrorResponse) => {
@@ -136,7 +135,7 @@ export class UserComponent implements OnInit {
     this.roleIds = [];
 
     this.updateEditCache();
-    this.editCache[0].edit = true;
+    this.editCache['0'].edit = true;
   }
 
   // 删除数据
@@ -163,21 +162,10 @@ export class UserComponent implements OnInit {
 
   // 放弃修改
   cancelEdit(id: string): void {
-    console.log("id:" + id);
-    const index = this.dataSet.findIndex(item => item.id == +id);
-    console.log("index:"+index);
+    const index = this.dataSet.findIndex(item => item.id === +id);
 
     if (this.formStatus === 1) {
-      console.log('begin splice=========');
-      this.dataSet.splice(0, 1);
-      console.log('end splice===========');
-      console.log("editCache:" + this.editCache);
-      // this.editCache[id] = {};
-      console.log("endCache:" + this.editCache);
-      console.log("dataSet" + this.dataSet);
-      this.updateEditCache();
-      console.log("dateSet" + this.dataSet);
-      console.log("dkkkkkkkkkkkkkkkkkk")
+      this.loadUserExtends();
     } else {
       this.editCache[id] = {
         data: {...this.dataSet[index]},
@@ -252,7 +240,7 @@ export class UserComponent implements OnInit {
     } else if (this.formStatus === 2) {
       // this.editCache[id].data.dataPermission = {id: this.editCache[id].data.dataPermissionId}
 
-      console.log(this.editCache[id].data);
+      // console.log(this.editCache[id].data);
 
       this.userExtendsExtService.update(this.editCache[id].data).subscribe(
         (res) => {
@@ -276,6 +264,7 @@ export class UserComponent implements OnInit {
    */
 
   updateEditCache(): void {
+    this.editCache = {};
     this.dataSet.forEach(item => {
       // if (!this.editCache[item.id]) {
       this.editCache[item.id] = {

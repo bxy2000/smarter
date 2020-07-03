@@ -20,14 +20,16 @@ import java.util.Optional;
 public interface UserExtendsRepositoryExtends extends JpaRepository<UserExtends, Long>, JpaSpecificationExecutor<UserExtends> {
 
     @Query(value = "select distinct user_extends from UserExtends user_extends " +
+        " inner join user_extends.user user " +
         " left join fetch user_extends.roles " +
         " left join user_extends.organization " +
-        " where (:login = '' or user_extends.user.login like concat('%',:login,'%')) " +
+        " where (:login = '' or user.login like concat('%',:login,'%')) " +
         " and (:username = '' or user_extends.username like concat('%',:username,'%')) " +
         " and (:organizationCode = '' or user_extends.organization.code like concat('',:organizationCode,'%')) ",
         countQuery = "select count(distinct user_extends) from UserExtends user_extends " +
+            " inner join user_extends.user user " +
             " left join user_extends.organization " +
-            " where (:login = '' or user_extends.user.login like concat('%',:login,'%')) " +
+            " where (:login = '' or user.login like concat('%',:login,'%')) " +
             " and (:username = '' or user_extends.username like concat('%',:username,'%')) " +
             " and (:organizationCode = '' or user_extends.organization.code like concat('',:organizationCode,'%')) ")
     Page<UserExtends> findAllWithEagerRelationships(@Param("login") String login,

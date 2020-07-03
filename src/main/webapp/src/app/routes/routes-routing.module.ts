@@ -25,6 +25,7 @@ const routes: Routes = [
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       {path: 'dashboard', component: DashboardComponent, data: {title: '仪表盘', titleI18n: 'dashboard'}},
       {path: 'exception', loadChildren: () => import('./exception/exception.module').then(m => m.ExceptionModule)},
+      {path: 'report', loadChildren: './report/report.module#ReportModule'},
       {path: 'system', loadChildren: './system/system.module#SystemModule'},
     ]
   },

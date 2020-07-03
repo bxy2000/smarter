@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'layout-passport',
@@ -8,15 +8,15 @@ import { Component } from '@angular/core';
 export class LayoutPassportComponent {
   links = [
     {
-      title: '帮助',
+      title: '', // '帮助',
       href: '',
     },
     {
-      title: '隐私',
+      title: '', // '隐私',
       href: '',
     },
     {
-      title: '条款',
+      title: '',//'条款',
       href: '',
     },
   ];
