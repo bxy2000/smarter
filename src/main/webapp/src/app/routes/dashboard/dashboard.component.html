@@ -1,14 +1,18 @@
 <page-header [title]="''" [autoBreadcrumb]="false">
   功能导航&nbsp;/&nbsp;首页
 </page-header>
-<nz-card>
-  <h2>欢迎使用 BI 门户</h2>
-
-  <p>
-    您有任何问题，可以访问以下资源
-  </p>
-
-  <ul>
-    <li><a href="http://www.gilight.cn/" target="_blank" rel="noopener noreferrer">精华教育</a></li>
-  </ul>
+<nz-card nzTitle="欢迎使用 BI 门户">
+  <h2>功能描述 V1.0</h2>
+  <p>BI门户在功能上与IE收藏夹类似，都是用来收集各种资源地址，但是也有明显的不同和限定：</p>
+  <ol>
+    <li>主要收集来自BI、报表或者其他管理系统的链接资源</li>
+    <li>由管理员收集整理，统一编排，而不是由用户自己操作</li>
+    <li>这些资源可以分配给不同的角色，而用户可以拥有多个角色</li>
+    <li>该系统可以单独使用，也可以与CAS系统集成，用户对某一资源的访问权限最终由目标系统决定</li>
+  </ol>
+  <h2>V1.0 明确不实现以下功能</h2>
+  <ol>
+    <li>数据权限</li>
+    <li>向目标系统动态传递参数</li>
+  </ol>
 </nz-card>
