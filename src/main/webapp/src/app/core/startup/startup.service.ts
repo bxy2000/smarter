@@ -60,6 +60,7 @@ export class StartupService {
     // console.log("username:" + user.name);
 
     this.accountExtService.getMenu(user.name).subscribe((menu) => {
+      // console.log(menu);
       this.menuService.clear();
       this.menuService.add(menu);
       // console.log(menu);

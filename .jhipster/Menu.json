@@ -40,6 +40,26 @@
         {
             "fieldName": "description",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "menuType",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "menuLink",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "2048"
+        },
+        {
+            "fieldName": "menuOrder",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "menuHeight",
+            "fieldType": "Integer"
         }
     ],
     "relationships": [

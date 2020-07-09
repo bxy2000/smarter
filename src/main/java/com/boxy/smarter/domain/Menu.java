@@ -55,6 +55,19 @@ public class Menu implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "menu_type")
+    private Integer menuType;
+
+    @Size(max = 2048)
+    @Column(name = "menu_link", length = 2048)
+    private String menuLink;
+
+    @Column(name = "menu_order")
+    private Integer menuOrder;
+
+    @Column(name = "menu_height")
+    private Integer menuHeight;
+
     @OneToMany(mappedBy = "parent")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Menu> children = new HashSet<>();
@@ -181,6 +194,58 @@ public class Menu implements Serializable {
         this.description = description;
     }
 
+    public Integer getMenuType() {
+        return menuType;
+    }
+
+    public Menu menuType(Integer menuType) {
+        this.menuType = menuType;
+        return this;
+    }
+
+    public void setMenuType(Integer menuType) {
+        this.menuType = menuType;
+    }
+
+    public String getMenuLink() {
+        return menuLink;
+    }
+
+    public Menu menuLink(String menuLink) {
+        this.menuLink = menuLink;
+        return this;
+    }
+
+    public void setMenuLink(String menuLink) {
+        this.menuLink = menuLink;
+    }
+
+    public Integer getMenuOrder() {
+        return menuOrder;
+    }
+
+    public Menu menuOrder(Integer menuOrder) {
+        this.menuOrder = menuOrder;
+        return this;
+    }
+
+    public void setMenuOrder(Integer menuOrder) {
+        this.menuOrder = menuOrder;
+    }
+
+    public Integer getMenuHeight() {
+        return menuHeight;
+    }
+
+    public Menu menuHeight(Integer menuHeight) {
+        this.menuHeight = menuHeight;
+        return this;
+    }
+
+    public void setMenuHeight(Integer menuHeight) {
+        this.menuHeight = menuHeight;
+    }
+
     public Set<Menu> getChildren() {
         return children;
     }
@@ -273,6 +338,10 @@ public class Menu implements Serializable {
             ", icon='" + getIcon() + "'" +
             ", hide='" + isHide() + "'" +
             ", description='" + getDescription() + "'" +
+            ", menuType=" + getMenuType() +
+            ", menuLink='" + getMenuLink() + "'" +
+            ", menuOrder=" + getMenuOrder() +
+            ", menuHeight=" + getMenuHeight() +
             "}";
     }
 }

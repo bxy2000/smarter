@@ -305,7 +305,13 @@ public class UserExtendsServiceExtends {
             addParents(menus, u);
         });
 
+//        Collections.sort(menus);
+
+//        System.out.println(menus);
+
         buildTree(result, menus, null);
+
+//        System.out.println(result);
 
         return result;
     }

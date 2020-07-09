@@ -1,0 +1,24 @@
+<nz-card nzTitle="服务状态">
+  <nz-table #basicTable [nzData]="health"
+            nzSize="small"
+            nzBordered
+            [nzFrontPagination]="false"
+  >
+    <thead>
+    <tr>
+      <th>服务名称</th>
+      <th>状态</th>
+      <th>详细情况</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{'health.indicator.' + data.key}}</td>
+      <td>{{data.value.status}}</td>
+      <td>
+        &nbsp;
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

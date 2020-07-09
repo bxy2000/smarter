@@ -125,4 +125,20 @@ public class MenuDTO {
     public void setChildren(List<MenuDTO> children) {
         this.children = children;
     }
+
+    @Override
+    public String toString() {
+        return "MenuDTO{" +
+            "id=" + id +
+            ", text='" + text + '\'' +
+            ", group=" + group +
+            ", link='" + link + '\'' +
+            ", externalLink='" + externalLink + '\'' +
+            ", target='" + target + '\'' +
+            ", icon='" + icon + '\'' +
+            ", hide=" + hide +
+            ", description='" + description + '\'' +
+            ", children=" + children +
+            '}';
+    }
 }

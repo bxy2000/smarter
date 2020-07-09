@@ -1,4 +1,4 @@
-import { IRole } from './role.model';
+import {IRole} from './role.model';
 
 export interface IMenu {
   id?: number;
@@ -10,6 +10,10 @@ export interface IMenu {
   icon?: string;
   hide?: boolean;
   description?: string;
+  menuType?: number;
+  menuLink?: string;
+  menuOrder?: number;
+  menuHeight?: number;
   children?: IMenu[];
   parent?: IMenu;
   roles?: IRole[];
@@ -26,6 +30,10 @@ export class Menu implements IMenu {
     public icon?: string,
     public hide?: boolean,
     public description?: string,
+    public menuType?: number,
+    public menuLink?: string,
+    public menuOrder?: number,
+    public menuHeight?: number,
     public children?: IMenu[],
     public parent?: IMenu,
     public roles?: IRole[]

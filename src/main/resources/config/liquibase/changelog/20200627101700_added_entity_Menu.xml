@@ -40,6 +40,18 @@
             <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="menu_type" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="menu_link" type="varchar(2048)">
+                <constraints nullable="true" />
+            </column>
+            <column name="menu_order" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="menu_height" type="integer">
+                <constraints nullable="true" />
+            </column>
             <column name="parent_id" type="bigint">
                 <constraints nullable="true" />
             </column>

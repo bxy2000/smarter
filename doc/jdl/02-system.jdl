@@ -52,7 +52,9 @@ entity Menu {
     // 辅助----链接地址
     menuLink String maxlength(2048),
     // 辅助----显示顺序，0，9系统保留，1、用户新增
-    menuOrder Integer
+    menuOrder Integer,
+    // 辅助----高度
+    menuHeight Integer
 }
 
 relationship OneToOne {

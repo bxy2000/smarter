@@ -1,44 +1,85 @@
 <page-header [title]="''" [autoBreadcrumb]="false">
-  功能导航&nbsp;/&nbsp;系统功能&nbsp;/&nbsp;全局资源
+  功能导航&nbsp;/&nbsp;系统功能&nbsp;/&nbsp;导航菜单
 </page-header>
-<nz-card>
-  <nz-table #nzTable nzSize="small" nzBordered [nzData]="data">
-    <thead>
-      <tr>
-        <th nzAlign="center">ID</th>
-        <th nzAlign="center">功能</th>
-        <th nzAlign="center">分组</th>
-        <th nzAlign="center">链接</th>
-        <th nzAlign="center">外部链接</th>
-        <th nzAlign="center">外部target</th>
-        <th nzAlign="center">图标</th>
-        <th nzAlign="center">隐藏</th>
-        <th nzAlign="center">描述</th>
-      </tr>
-    </thead>
-    <tbody>
-      <ng-template ngFor let-data [ngForOf]="nzTable.data">
-        <ng-template ngFor let-item [ngForOf]="expandDataCache[data.id]">
-          <tr *ngIf="(item.parent&&item.parent.expand)||!(item.parent)">
-            <td [nzIndentSize]="item.level*20" [nzShowExpand]="!!item.children" [(nzExpand)]="item.expand"
-              (nzExpandChange)="collapse(expandDataCache[data.id],item,$event)">
-              {{item.id}}
-            </td>
-            <td>{{item.text}}</td>
-            <td nzAlign="center">
-              <label nz-checkbox [(ngModel)]="item.group" [nzDisabled]="true"></label>
-            </td>
-            <td>{{item.link}}</td>
-            <td>{{item.externalLink}}</td>
-            <td>{{item.target}}</td>
-            <td>{{item.icon}}</td>
-            <td nzAlign="center">
-              <label nz-checkbox [(ngModel)]="item.hide" [nzDisabled]="true"></label>
-            </td>
-            <td>{{item.description}}</td>
-          </tr>
-        </ng-template>
-      </ng-template>
-    </tbody>
-  </nz-table>
-</nz-card>
+<div nz-row nzGutter="8">
+  <div nz-col nzSpan="6">
+    <nz-card nzTitle="导航菜单" [nzExtra]="extraTemplate">
+      <div style="height:377px; overflow-y: auto; border: solid 1px #d9d9d9;">
+        <nz-tree
+          #nzTreeComponent
+          [nzData]="nodes"
+          [nzSelectedKeys]="selectedNode"
+          [nzExpandAll]="true"
+          [nzDraggable]="true"
+          (nzClick)="nzClick($event)"
+        ></nz-tree>
+      </div>
+    </nz-card>
+    <ng-template #extraTemplate>
+      <a nz-dropdown [nzDropdownMenu]="menu">
+        操作
+        <i nz-icon nzType="down"></i>
+      </a>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu nzSelectable>
+          <li nz-menu-item (click)="createNode(0)">新增分组</li>
+          <li nz-menu-item (click)="createNode(1)">新增菜单(内链)</li>
+          <li nz-menu-item (click)="createNode(2)">新增菜单(外链)</li>
+          <li nz-menu-item (click)="deleteNode()">删除</li>
+        </ul>
+      </nz-dropdown-menu>
+    </ng-template>
+  </div>
+  <div nz-col class="gutter-row" nzSpan="18">
+    <nz-card nzTitle="属性">
+      <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <nz-form-item>
+          <nz-form-label [nzSm]="2" [nzXs]="24" nzRequired nzFor="menuType">类型</nz-form-label>
+          <nz-radio-group formControlName="menuType">
+            <label nz-radio-button nzValue="0" nzDisabled>分组</label>
+            <label nz-radio-button nzValue="1" nzDisabled>内链</label>
+            <label nz-radio-button nzValue="2" nzDisabled>外链</label>
+          </nz-radio-group>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="2" [nzXs]="24" nzRequired nzFor="text">标题</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入标题!">
+            <input nz-input formControlName="text" id="title"/>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label [nzSm]="2" [nzXs]="24" nzRequired nzFor="menuLink">链接</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入链接!">
+<!--            <input nz-input formControlName="menuLink" id="menuLink"/>-->
+
+            <textarea rows="4" nz-input formControlName="menuLink" id="menuLink"></textarea>
+
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label [nzSm]="2" [nzXs]="24" nzFor="remarks">高度</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输高度!">
+            <input nz-input formControlName="menuHeight" id="height"/>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row class="register-area">
+          <nz-form-control [nzSpan]="14" [nzOffset]="2">
+            <button nz-button nzType="primary">保存</button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+
+    </nz-card>
+  </div>
+</div>
+
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <input nz-input placeholder="请输入" [(ngModel)]="inputNodeTitle"/>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="deleteIsVisible" nzTitle="确认删除吗？" (nzOnCancel)="deleteHandleCancel()"
+  (nzOnOk)="deleteHandleOk()">
+  <p>删除之后，数据无法恢复，请谨慎操作！</p>
+</nz-modal>

@@ -55,6 +55,18 @@ public class MenuResourceIT {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
+    private static final Integer DEFAULT_MENU_TYPE = 1;
+    private static final Integer UPDATED_MENU_TYPE = 2;
+
+    private static final String DEFAULT_MENU_LINK = "AAAAAAAAAA";
+    private static final String UPDATED_MENU_LINK = "BBBBBBBBBB";
+
+    private static final Integer DEFAULT_MENU_ORDER = 1;
+    private static final Integer UPDATED_MENU_ORDER = 2;
+
+    private static final Integer DEFAULT_MENU_HEIGHT = 1;
+    private static final Integer UPDATED_MENU_HEIGHT = 2;
+
     @Autowired
     private MenuRepository menuRepository;
 
@@ -84,7 +96,11 @@ public class MenuResourceIT {
             .target(DEFAULT_TARGET)
             .icon(DEFAULT_ICON)
             .hide(DEFAULT_HIDE)
-            .description(DEFAULT_DESCRIPTION);
+            .description(DEFAULT_DESCRIPTION)
+            .menuType(DEFAULT_MENU_TYPE)
+            .menuLink(DEFAULT_MENU_LINK)
+            .menuOrder(DEFAULT_MENU_ORDER)
+            .menuHeight(DEFAULT_MENU_HEIGHT);
         return menu;
     }
     /**
@@ -102,7 +118,11 @@ public class MenuResourceIT {
             .target(UPDATED_TARGET)
             .icon(UPDATED_ICON)
             .hide(UPDATED_HIDE)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .menuType(UPDATED_MENU_TYPE)
+            .menuLink(UPDATED_MENU_LINK)
+            .menuOrder(UPDATED_MENU_ORDER)
+            .menuHeight(UPDATED_MENU_HEIGHT);
         return menu;
     }
 
@@ -134,6 +154,10 @@ public class MenuResourceIT {
         assertThat(testMenu.getIcon()).isEqualTo(DEFAULT_ICON);
         assertThat(testMenu.isHide()).isEqualTo(DEFAULT_HIDE);
         assertThat(testMenu.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testMenu.getMenuType()).isEqualTo(DEFAULT_MENU_TYPE);
+        assertThat(testMenu.getMenuLink()).isEqualTo(DEFAULT_MENU_LINK);
+        assertThat(testMenu.getMenuOrder()).isEqualTo(DEFAULT_MENU_ORDER);
+        assertThat(testMenu.getMenuHeight()).isEqualTo(DEFAULT_MENU_HEIGHT);
     }
 
     @Test
@@ -174,7 +198,11 @@ public class MenuResourceIT {
             .andExpect(jsonPath("$.[*].target").value(hasItem(DEFAULT_TARGET)))
             .andExpect(jsonPath("$.[*].icon").value(hasItem(DEFAULT_ICON)))
             .andExpect(jsonPath("$.[*].hide").value(hasItem(DEFAULT_HIDE.booleanValue())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].menuType").value(hasItem(DEFAULT_MENU_TYPE)))
+            .andExpect(jsonPath("$.[*].menuLink").value(hasItem(DEFAULT_MENU_LINK)))
+            .andExpect(jsonPath("$.[*].menuOrder").value(hasItem(DEFAULT_MENU_ORDER)))
+            .andExpect(jsonPath("$.[*].menuHeight").value(hasItem(DEFAULT_MENU_HEIGHT)));
     }
     
     @Test
@@ -195,7 +223,11 @@ public class MenuResourceIT {
             .andExpect(jsonPath("$.target").value(DEFAULT_TARGET))
             .andExpect(jsonPath("$.icon").value(DEFAULT_ICON))
             .andExpect(jsonPath("$.hide").value(DEFAULT_HIDE.booleanValue()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION));
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.menuType").value(DEFAULT_MENU_TYPE))
+            .andExpect(jsonPath("$.menuLink").value(DEFAULT_MENU_LINK))
+            .andExpect(jsonPath("$.menuOrder").value(DEFAULT_MENU_ORDER))
+            .andExpect(jsonPath("$.menuHeight").value(DEFAULT_MENU_HEIGHT));
     }
 
     @Test
@@ -226,7 +258,11 @@ public class MenuResourceIT {
             .target(UPDATED_TARGET)
             .icon(UPDATED_ICON)
             .hide(UPDATED_HIDE)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .menuType(UPDATED_MENU_TYPE)
+            .menuLink(UPDATED_MENU_LINK)
+            .menuOrder(UPDATED_MENU_ORDER)
+            .menuHeight(UPDATED_MENU_HEIGHT);
 
         restMenuMockMvc.perform(put("/api/menus")
             .contentType(MediaType.APPLICATION_JSON)
@@ -245,6 +281,10 @@ public class MenuResourceIT {
         assertThat(testMenu.getIcon()).isEqualTo(UPDATED_ICON);
         assertThat(testMenu.isHide()).isEqualTo(UPDATED_HIDE);
         assertThat(testMenu.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testMenu.getMenuType()).isEqualTo(UPDATED_MENU_TYPE);
+        assertThat(testMenu.getMenuLink()).isEqualTo(UPDATED_MENU_LINK);
+        assertThat(testMenu.getMenuOrder()).isEqualTo(UPDATED_MENU_ORDER);
+        assertThat(testMenu.getMenuHeight()).isEqualTo(UPDATED_MENU_HEIGHT);
     }
 
     @Test
