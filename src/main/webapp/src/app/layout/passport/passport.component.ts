@@ -16,7 +16,7 @@ export class LayoutPassportComponent {
       href: '',
     },
     {
-      title: '',//'条款',
+      title: '',// '条款',
       href: '',
     },
   ];
