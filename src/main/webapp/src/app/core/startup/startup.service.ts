@@ -16,6 +16,24 @@ import {AccountExtService} from "@core/service/customized/account-ext.service";
  */
 @Injectable()
 export class StartupService {
+  getQueryVariable(variable): string {
+    var query = window.location.href.split("?");
+
+    if(query.length != 2) {
+      return null;
+    }
+
+    var vars = query[1].split("&");
+
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split("=");
+      if (pair[0] == variable) {
+        return pair[1];
+      }
+    }
+    return null;
+  }
+
   constructor(
     iconSrv: NzIconService,
     private menuService: MenuService,
@@ -31,6 +49,14 @@ export class StartupService {
   }
 
   private viaHttp(resolve: any, reject: any) {
+    let login = this.getQueryVariable("userId");
+
+    if(login != null && login != "") {
+      this.injector.get(Router).navigateByUrl('/passport/login?id=' + login);
+      resolve({});
+      return;
+    }
+
     const tokenData = this.tokenService.get();
     if (!tokenData.token) {
       this.injector.get(Router).navigateByUrl('/passport/login');
@@ -39,8 +65,8 @@ export class StartupService {
     }
 
     const app: any = {
-      name: `通用系统平台`,
-      description: `通用系统平台`
+      name: `BI 门户`,
+      description: `BI 门户`
     };
     const user: any = {
       name: tokenData.name,

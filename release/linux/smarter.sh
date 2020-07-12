@@ -21,7 +21,7 @@ start() {
   if [ $? -eq "0" ]; then
     echo "${APP_NAME} is already running. pid=${pid} ."
   else
-    nohup java -jar $APP_NAME --spring.config.location=application.yml > ${APP_NAME}.log 2>&1 &
+    nohup java -jar $APP_NAME --spring.profiles.active=prod --spring.config.location=application.yml,application-prod.yml > ${APP_NAME}.log 2>&1 &
     echo "${APP_NAME} start success"
     echo "press ctrl+c quit."
     tail -f ${APP_NAME}.log

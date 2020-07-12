@@ -160,9 +160,9 @@ export class MenuComponent implements OnInit {
       roles: [],
     };
     this.menuService.create(node).subscribe((res) => {
-      res.body.key = res.body.id;
-      res.body.title = res.body.text;
-      res.body.origin = res.body;
+      res.body['key'] = res.body.id;
+      res.body['title'] = res.body.text;
+      res.body['origin'] = res.body;
       callback(res.body);
       this.messageService.success('新增成功');
     }, (res) => {
@@ -264,10 +264,11 @@ export class MenuComponent implements OnInit {
         node.target = '_blank';
         break;
     }
+    // console.log('dddddddddd');
     this.menuService.update(node).subscribe((res) => {
-      res.body.key = res.body.id;
-      res.body.title = res.body.text;
-      res.body.origin = res.body;
+      res.body['key'] = res.body.id;
+      res.body['title'] = res.body.text;
+      res.body['origin'] = res.body;
       callback(res.body);
       this.messageService.success('修改成功！');
     }, (res) => {

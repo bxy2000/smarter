@@ -166,3 +166,10 @@ jhipster:
 # ===================================================================
 
 # application:
+
+# 企业微信
+wechat:
+  cp:
+    corpid: ww945a795fe54c12ca
+    corpsecret: _Ra9yJGofa2PhxdQhvYFJwNBp2arF_pGkEgqN113CDs
+    redirect_uri: http://crm.gilight.cn:9080//cas/wechat/oauth?url=http://crm.gilight.cn:9080/?userId=USERID

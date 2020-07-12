@@ -46,7 +46,7 @@ export class RoleComponent implements OnInit {
           u.key = u.id+'';
           u.title=u.text;
           u.data= u;
-          if(u.id == 10100){
+          if(u.id == 2){
             u.disabled = true;
           }
         });
@@ -94,8 +94,8 @@ export class RoleComponent implements OnInit {
     this.roleService.find(data.id).subscribe((res)=>{
       this.checkedRoles = res.body.menus.map(u=>u.id+'');
 
-      if(this.checkedRoles.findIndex(u=>u == '10100') < 0) {
-        this.checkedRoles= ['10100', ...this.checkedRoles];
+      if(this.checkedRoles.findIndex(u=>u == '2') < 0) {
+        this.checkedRoles= ['2', ...this.checkedRoles];
       }
     })
   }
@@ -137,7 +137,7 @@ export class RoleComponent implements OnInit {
     this.dataSet = [...this.dataSet, {
       id: this.currentId,
       roleName: '',
-      menus: [{id:10100}]
+      menus: [{id:2}]
     }];
     this.updateEditCache();
     this.editCache[this.currentId].edit = true;

@@ -5,10 +5,6 @@ id,text,jhi_group,link,external_link,target,icon,hide,description,menu_type,menu
 4,导航菜单,0,/system/menu,,,,0,,1,,9,800,3
 5,角色权限,0,/system/role,,,,0,,1,,9,800,3
 6,用户管理,0,/system/user,,,,0,,1,,9,800,3
-7,管理功能,0,/admin,,,anticon anticon-user,0,,0,,9,800,1
-8,资源监控,0,/admin/metrics,,,,0,,1,,9,800,7
-9,服务状态,0,/admin/health,,,,0,,1,,9,800,7
-10,审计（审核）,0,/admin/audits,,,,0,,1,,9,800,7
 100,常用导航,1,/report,,,anticon-link,0,,0,/report,1,800,1
 101,百度-外链,0,,http://www.baidu.com,_blank,,0,,2,http://www.baidu.com,1,800,100
 102,百度-内链,0,/report/bi/102,,,,0,,1,http://www.baidu.com,1,800,100

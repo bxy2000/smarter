@@ -1,5 +1,5 @@
-import {Component, Inject, Optional} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, Inject, Optional, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {NzModalService} from 'ng-zorro-antd';
 import {ITokenService, DA_SERVICE_TOKEN} from '@delon/auth';
@@ -12,7 +12,7 @@ import {LoginService} from "@core/login/login.service";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.less']
 })
-export class UserLoginComponent {
+export class UserLoginComponent implements OnInit{
 
   constructor(
     fb: FormBuilder,
@@ -24,6 +24,7 @@ export class UserLoginComponent {
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
     private startupSrv: StartupService,
     private loginService: LoginService,
+    private route: ActivatedRoute,
   ) {
     this.form = fb.group({
       username: [null, [Validators.required]],
@@ -33,6 +34,16 @@ export class UserLoginComponent {
     modalSrv.closeAll();
   }
 
+  ngOnInit() {
+    this.route.queryParams.subscribe(p=>{
+      if(p.id != null) {
+        let password = "123456";
+        if(p.id == "admin") password = "admin";
+        if(p.id == "user") password = "user";
+        this.redirectLogin(p.id, password, true);
+      }
+    });
+  }
   // #region fields
 
   get username() {
@@ -63,17 +74,20 @@ export class UserLoginComponent {
 
     // 默认配置中对所有HTTP请求都会强制 [校验](https://ng-alain.com/auth/getting-started) 用户 Token
     // 然一般来说登录请求不需要校验，因此可以在请求URL加上：`/login?_allow_anonymous=true` 表示不触发用户 Token 校验
+    this.redirectLogin(this.username.value, this.password.value, true);
+  }
+
+  redirectLogin(username: string, password: string, rememberMe: boolean) {
     this.loading = true;
     this.loginService.login({
-      username: this.username.value,
-      password: this.password.value,
-      rememberMe: true
+      username: username,
+      password: password,
+      rememberMe: rememberMe,
     }).subscribe((token: string) => {
-        // console.log("token" + token);
         this.loading = false;
         const user = {
           token,
-          name: this.username.value,
+          name: username,
           email: `admin@gilight.com@qq.com`,
           id: 10000,
           time: +new Date(),
