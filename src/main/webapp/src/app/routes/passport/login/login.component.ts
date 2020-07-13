@@ -33,17 +33,6 @@ export class UserLoginComponent implements OnInit{
     });
     modalSrv.closeAll();
   }
-
-  ngOnInit() {
-    this.route.queryParams.subscribe(p=>{
-      if(p.id != null) {
-        let password = "123456";
-        if(p.id == "admin") password = "admin";
-        if(p.id == "user") password = "user";
-        this.redirectLogin(p.id, password, true);
-      }
-    });
-  }
   // #region fields
 
   get username() {
@@ -61,6 +50,17 @@ export class UserLoginComponent implements OnInit{
   form: FormGroup;
   error = '';
   loading = false;
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(p=>{
+      if(p.id != null) {
+        let password = "123456";
+        if(p.id == "admin") password = "admin";
+        if(p.id == "user") password = "user";
+        this.redirectLogin(p.id, password, true);
+      }
+    });
+  }
 
   submit() {
     this.error = '';
@@ -80,9 +80,9 @@ export class UserLoginComponent implements OnInit{
   redirectLogin(username: string, password: string, rememberMe: boolean) {
     this.loading = true;
     this.loginService.login({
-      username: username,
-      password: password,
-      rememberMe: rememberMe,
+      username,
+      password,
+      rememberMe,
     }).subscribe((token: string) => {
         this.loading = false;
         const user = {
