@@ -17,16 +17,16 @@ import {AccountExtService} from "@core/service/customized/account-ext.service";
 @Injectable()
 export class StartupService {
   getQueryVariable(variable): string {
-    var query = window.location.href.split("?");
+    const query = window.location.href.split("?");
 
     if(query.length != 2) {
       return null;
     }
 
-    var vars = query[1].split("&");
+    const vars = query[1].split("&");
 
-    for (var i = 0; i < vars.length; i++) {
-      var pair = vars[i].split("=");
+    for (let i = 0; i < vars.length; i++) {
+      const pair = vars[i].split("=");
       if (pair[0] == variable) {
         return pair[1];
       }
@@ -49,7 +49,7 @@ export class StartupService {
   }
 
   private viaHttp(resolve: any, reject: any) {
-    let login = this.getQueryVariable("userId");
+    const login = this.getQueryVariable("userId");
 
     if(login != null && login != "") {
       this.injector.get(Router).navigateByUrl('/passport/login?id=' + login);
