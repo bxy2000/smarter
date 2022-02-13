@@ -40,7 +40,7 @@
     "@delon/mock": "^8.9.2",
     "@delon/theme": "^8.9.2",
     "@delon/util": "^8.9.2",
-    "ajv": "^6.10.2",
+    "ajv": "^6.12.3",
     "ng-alain": "^8.9.2",
     "ng-zorro-antd": "^8.5.2",
     "rxjs": "~6.4.0",
